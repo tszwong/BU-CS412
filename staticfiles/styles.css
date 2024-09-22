@@ -1,0 +1,49 @@
+body {
+    background-color: gray;
+    color: white;
+}
+
+.center-content {
+    text-align: center; 
+}
+
+.quotes-list li {
+    margin-bottom: 20px; 
+    list-style: none;
+}
+
+.centered-image {
+    display: block;   
+    margin: 0 auto;   
+    margin-bottom: 25px;
+}
+
+.navbar {
+    background-color: #333;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.nav-list li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.nav-list li a {
+    color: white;
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.nav-list li a:hover {
+    background-color: #575757;
+}
