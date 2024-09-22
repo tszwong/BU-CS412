@@ -49,7 +49,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = "cs412.urls"
@@ -133,6 +132,3 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 ALLOWED_HOSTS = ['*']
-
-# Whitenoise settings for compression and caching
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
