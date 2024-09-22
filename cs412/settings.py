@@ -131,9 +131,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-
-ALLOWED_HOSTS = ['glacial-depths-63173.herokuapp.com']
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']
 
 STORAGES = {
     # ...
