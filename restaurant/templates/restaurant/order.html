@@ -1,0 +1,90 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div id="main-div">
+    <h1>Place Your Order</h1>
+    
+    <form action="{% url 'confirmation' %}" method="POST">
+        {% csrf_token %}
+        
+        <!-- Display the daily special from the context -->
+        <h2>Today's Daily Special</h2>
+        <div>
+            <label>
+                <input type="checkbox" name="menu_item" value="{{ daily_special.name }}"> 
+                {{ daily_special.name }} - ${{ daily_special.price }}
+            </label>
+            <p>{{ daily_special.description }}</p>
+        </div>
+        
+        <!-- list all of the menu -->
+        <h2>Menu Items</h2>
+        
+        <!-- item 1 -->
+        <div>
+            <label>
+                <input type="checkbox" name="menu_item" value="Tomato Egg Stir Fry">
+                Tomato Egg Stir Fry - $14.99
+            </label>
+        </div>
+        
+        <!-- item 2 -->
+        <div>
+            <label>
+                <input type="checkbox" name="menu_item" value="Stir Fry Baby Bok Choy">
+                Stir Fry Baby Bok Choy - $12.99
+            </label>
+        </div>
+        
+        <!-- item 3 -->
+        <div>
+            <label>
+                <input type="checkbox" name="menu_item" value="Mala Tang"> 
+                Mala Tang - $18.99 (Choose your ingredients)
+            </label>
+            <div style="margin-left: 20px;">
+                <input type="checkbox" name="ingredient" value="Beef Slices"> Beef Slices <br>
+                <input type="checkbox" name="ingredient" value="Shrimp"> Shrimp <br>
+                <input type="checkbox" name="ingredient" value="Tofu"> Tofu <br>
+                <input type="checkbox" name="ingredient" value="Noodles"> Noodles <br>
+                <input type="checkbox" name="ingredient" value="Fish Balls"> Fish Balls <br>
+                <input type="checkbox" name="ingredient" value="Cabbage"> Cabbage <br>
+                <input type="checkbox" name="ingredient" value="Mushrooms"> Mushrooms <br>
+                <input type="checkbox" name="ingredient" value="Lotus Root"> Lotus Root <br>
+            </div>
+        </div>
+
+        <!-- item 4 -->
+        <div>
+            <label>
+                <input type="checkbox" name="menu_item" value="Sweet Red Bean Soup">
+                Sweet Red Bean Soup - $8.99
+            </label>
+        </div>
+        
+        <!-- special instructions -->
+        <h2>Special Instructions</h2>
+        <textarea name="special_instructions" rows="4" cols="50" placeholder="Any special instructions for your order..."></textarea>
+        
+        <!-- customer info -->
+        <h2>Customer Information</h2>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <!-- Submit Button -->
+        <button type="submit">Submit Order</button>
+    </form>
+</div>
+{% endblock %}
