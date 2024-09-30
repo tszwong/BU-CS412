@@ -32,7 +32,8 @@ def order(request):
         {"name": "Cindy's Chicken Wings", "price": 14.99, "description": "Crispy fried chicken wings made with our signature in-house Cindy Sauce"},
         {"name": "Tomato Egg Stir-fry", "price": 12.99, "description": "A simple yet flavorful dish featuring soft scrambled eggs stir-fried with juicy, tangy tomatoes. This classic Chinese comfort food is both savory and slightly sweet, perfect to enjoy with a bowl of steamed rice."},
         {"name": "Stir-Fried Baby Bok Choy", "price": 10.99, "description": "Tender and crisp baby bok choy stir-fried with garlic and a light seasoning, delivering a fresh, slightly crunchy texture with a mild, earthy flavor. A healthy and delicious vegetable side dish that pairs well with any meal."},
-        {"name": "Sweet Red Bean Soup", "price": 9.99, "description": "A warm and comforting dessert soup made from slow-cooked red adzuki beans, sweetened to perfection."}
+        {"name": "Sweet Red Bean Soup", "price": 9.99, "description": "A warm and comforting dessert soup made from slow-cooked red adzuki beans, sweetened to perfection."},
+        {"name": "Mala Tang", "price": 18.99, "description": "Hot and Spicy, pick what you want to add to it."},
     ]
 
     daily_special = random.choice(daily_specials)
@@ -64,11 +65,12 @@ def confirmation(request):
         
         # Define the menu items and their prices
         menu_items = {
-            "Tomato Egg Stir Fry": 14.99,
+            "Cindy's Chicken Wings": 14.99,
+            "Tomato Egg Stir Fry": 12.99,
             "Stir Fry Baby Bok Choy": 12.99,
             "Mala Tang": 18.99,
             "Sweet Red Bean Soup": 8.99,
-            # Ensure you also add the daily special's name and price to this dictionary.
+            
         }
         
         # If a daily special was ordered, add it to the total price
