@@ -107,3 +107,10 @@ def confirmation(request):
     
     # If the request method is not POST, redirect back to the order form
     return redirect('order')
+
+
+def restaurant_redirect(request):
+    """
+        redirect /restaurant to main
+    """
+    return redirect('main')

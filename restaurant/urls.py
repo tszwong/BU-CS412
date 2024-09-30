@@ -9,5 +9,6 @@ urlpatterns = [
     # path(url, view, name)
     path(r'', views.main, name="main"),
     path(r'order', views.order, name="order"),
+    path(r'restaurant', views.restaurant_redirect, name="restaurant_redirect"),
     path(r'confirmation', views.confirmation, name="confirmation"),
 ]
