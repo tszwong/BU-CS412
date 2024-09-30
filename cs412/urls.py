@@ -25,7 +25,6 @@ urlpatterns = [
     path("hw/", include("hw.urls")),
     path("quotes/", include("quotes.urls")),
     path("formdata/", include("formdata.urls")),
-    path("restaurant/", lambda request: redirect("/", permanent=True)),
+    path("restaurant/", include("restaurant.urls")),
     path("", include("restaurants.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

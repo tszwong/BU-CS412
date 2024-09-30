@@ -8,7 +8,6 @@ from . import views
 urlpatterns = [
     # path(url, view, name)
     path("", views.main, name="main"),
-    path(r'order', views.order, name="order"),
-    # path(r'restaurant', views.restaurant_redirect, name="restaurant_redirect"),
-    path(r'confirmation', views.confirmation, name="confirmation"),
+    path("order", views.order, name="order"),
+    path("confirmation", views.confirmation, name="confirmation"),
 ]
