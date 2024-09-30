@@ -111,8 +111,8 @@ def confirmation(request):
     return redirect('order')
 
 
-def restaurant_redirect(request):
-    """
-        redirect /restaurant to main
-    """
-    return redirect('main')
+# def restaurant_redirect(request):
+#     """
+#         redirect /restaurant to main
+#     """
+#     return redirect('main')
