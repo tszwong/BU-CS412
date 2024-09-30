@@ -7,7 +7,7 @@ from . import views
 # create a list of URLs for this app
 urlpatterns = [
     # path(url, view, name)
-    path("main/", views.main, name="main"),
-    path("order/", views.order, name="order"),
-    path("confirmation/", views.confirmation, name="confirmation"),
+    path("", views.main, name="main"),
+    path("order", views.order, name="order"),
+    path("confirmation", views.confirmation, name="confirmation"),
 ]
