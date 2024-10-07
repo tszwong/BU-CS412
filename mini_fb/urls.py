@@ -1,4 +1,5 @@
-# description: the app-specific URLs for the hw application
+# description: the app-specific URLs for the mini_fb application
+# mini_fb/urls.py
 
 from django.urls import path
 from django.conf import settings
