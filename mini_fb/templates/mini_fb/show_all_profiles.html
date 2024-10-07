@@ -1,0 +1,25 @@
+<!-- mini_fb/templates/mini_fb/show_all_profiles.html -->
+
+{% extends 'mini_fb/base.html' %}
+
+<!-- scriptlet code to display the value of the variable `articles` 
+{{ articles }}
+-->
+
+{% block content %}
+    <main class="grid-container">
+        {% for prof in profiles %}
+        <article>
+            {% if prof.profile_img %}
+            <img src="{{ prof.profile_img }}" alt="{{ prof.first_name }}'s profile image" style="width:150px;">
+            {% endif %}
+            
+            <div>
+                <h2>{{ prof.first_name }} {{ prof.last_name }}</h2>
+                <p><strong>City:</strong> {{ prof.city }}</p>
+                <!-- <p><strong>Email:</strong> {{ prof.email }}</p> -->
+            </div>
+        </article>
+        {% endfor %}
+    </main>
+{% endblock %}
