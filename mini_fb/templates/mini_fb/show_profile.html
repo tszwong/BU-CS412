@@ -1,0 +1,34 @@
+<!-- mini_fb/templates/mini_fb/show_profile.html -->
+
+{% extends "mini_fb/base.html" %}
+
+{% block content %}
+    <main class="grid-container">
+        <article class="one-profile" style="width: 60%; margin: auto;">
+            {% if profile.profile_img %}
+            <img src="{{ profile.profile_img }}" alt="{{ profile.first_name }}'s profile image" style="width:250px;">
+            {% endif %}
+            
+            <div style="margin: auto;">
+                <h1 style="font-size: 35px;">{{ profile.first_name }} {{ profile.last_name }}</h1>
+                <p><strong>City:</strong> {{ profile.city }}</p>
+            </div>
+        </article>
+
+        <div class="msgs-div">
+            <h2>Status Messages</h2>
+            {% for status in profile.status_messages.all %}
+            <article>
+            <div>
+                <strong>by {{ profile.first_name }} {{ profile.last_name }} at {{ status.timestamp }}</strong>
+                <p>{{ status.message }}</p>
+            </div>
+            </article>
+            {% endfor %}
+
+            <div class="center-content">
+                <a href="{% url 'create_status' profile.pk %}" class="submit-btn">Add New Status</a>
+            </div>
+        </div>
+    </main>
+{% endblock %}

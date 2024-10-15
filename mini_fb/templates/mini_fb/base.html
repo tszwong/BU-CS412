@@ -11,6 +11,15 @@
 
         <div class="header">
             <h1 id="page-title">Mini-Facebook</h1>
+
+            <nav class="navbar">
+                <ul class="nav-list">
+                    <!-- using scriptlet URL to look up URL by name -->
+                    <li><a href="{% url 'show_all_profiles' %}">Show All Profile</a></li>
+                    <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
+                </ul>
+            </nav>
+
         </div>
 
         {% block content %}
