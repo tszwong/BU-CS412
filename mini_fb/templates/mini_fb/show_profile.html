@@ -20,7 +20,7 @@
             {% for status in profile.status_messages.all %}
             <article>
             <div>
-                <strong>by {{ profile.first_name }} {{ profile.last_name }} at {{ status.timestamp }}</strong>
+                <strong>{{ profile.first_name }} {{ profile.last_name }} at {{ status.timestamp }}</strong>
                 <p>{{ status.message }}</p>
             </div>
             </article>
