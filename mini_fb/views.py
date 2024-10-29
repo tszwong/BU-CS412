@@ -154,7 +154,7 @@ class CreateFriendView(django.views.generic.View):
         """
 
         profile = Profile.objects.get(pk=kwargs['profile_pk'])
-        friend_profile = Profile.objects.get(pk=kwargs['friend_pk'])
+        friend_profile = Profile.objects.get(pk=kwargs['other_pk'])
         profile.add_friend(friend_profile)
         return redirect('show_profile', pk=profile.pk)
         
