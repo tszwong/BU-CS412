@@ -1,0 +1,28 @@
+<!-- mini_fb/templates/mini_fb/show_all_profiles.html -->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+    <main class="grid-container">
+        {% for status in profile.get_news_feed %}
+        <article>
+            <div class="msgs-div" style="margin-top: 0; padding-bottom: 5px; padding-top: 25px;">
+                <div class="news-msg-header" style="padding-left: 15px;">
+                    {% if status.profile.profile_img %}
+                    <img src="{{ status.profile.profile_img }}" alt="{{ status.profile.first_name }}'s profile image" style="width:60px; border-radius: 50%;">
+                    {% endif %}
+                    <p><strong>{{ status.profile.first_name }} {{ status.profile.last_name }}</strong> at {{ status.timestamp }}</p>
+                </div>
+                <br>
+                <span style="padding-left: 15px;">{{ status.message }}</span>
+                <br><br>
+                <div class="images" style="padding-left: 15px;">
+                    {% for img in status.get_images %}
+                        <img src="{{ img.image_file.url }}" alt="Image for status" style="width:150px;">
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </main>
+{% endblock %}

@@ -1,10 +1,11 @@
 # mini_fb/views.py
 
 from django import forms
-from django.shortcuts import render
+import django
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from .models import Image, Profile, StatusMessage
+from .models import Friend, Image, Profile, StatusMessage
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
 
 class ShowAllProfilesView(ListView):
@@ -138,3 +139,50 @@ class UpdateStatusMessageView(UpdateView):
         context = super().get_context_data(**kwargs)
         context['status_message'] = self.object
         return context
+    
+
+class CreateFriendView(django.views.generic.View):
+    """
+        View to handle adding a friend to a profile
+    """
+    
+    def dispatch(self, request, *args, **kwargs):
+        """
+            read the URL parameters (from self.kwargs), use the object manager to find the 
+            requisite Profile objects, and then call the Profile's add_friend method
+            Finally, we can redirect the user back to the profile page
+        """
+
+        profile = Profile.objects.get(pk=kwargs['profile_pk'])
+        friend_profile = Profile.objects.get(pk=kwargs['friend_pk'])
+        profile.add_friend(friend_profile)
+        return redirect('show_profile', pk=profile.pk)
+        
+
+class ShowFriendSuggestionsView(DetailView):
+    """
+        View to handle showing friend suggestions
+    """
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        profile = self.object
+        friends = Friend.objects.filter(profile1=profile).values_list('profile2', flat=True)
+        reverse_friends = Friend.objects.filter(profile2=profile).values_list('profile1', flat=True)
+        all_friend_ids = list(friends) + list(reverse_friends)
+        friend_suggestions = Profile.objects.exclude(id__in=all_friend_ids).exclude(id=profile.id)
+        context['friend_suggestions'] = friend_suggestions
+        return context
+    
+
+class ShowNewsFeedView(DetailView):
+    """
+        View to handle showing the news feed
+    """
+
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = 'profile'

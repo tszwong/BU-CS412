@@ -3,9 +3,9 @@
 {% extends 'mini_fb/base.html' %}
 
 {% block content %}
-    <main class="grid-container">
+    <main class="grid-container" style="display: flex; flex-wrap: wrap; flex-direction: row; align-content: center;">
         {% for prof in profiles %}
-        <article>
+        <article style="width: calc(50% - 20px);">
             {% if prof.profile_img %}
             <a href="{% url 'show_profile' prof.pk %}">
                 <img src="{{ prof.profile_img }}" alt="{{ prof.first_name }}'s profile image" style="width:150px;">
@@ -14,7 +14,7 @@
             
             <div>
                 <h2>
-                    <a href="{% url 'show_profile' prof.pk %}">
+                    <a href="{% url 'show_profile' prof.pk %}" style="text-decoration: none;">
                         {{ prof.first_name }} {{ prof.last_name }}
                     </a>
                 </h2>

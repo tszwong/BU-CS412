@@ -6,6 +6,9 @@
         <title>Mini FB</title>
         <!-- <link rel="stylesheet" href="/static/styles.css"> -->
         <link rel="stylesheet" href="{% static 'a5_styles.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
     </head>
     <body>
 
@@ -15,8 +18,12 @@
             <nav class="navbar">
                 <ul class="nav-list">
                     <!-- using scriptlet URL to look up URL by name -->
-                    <li><a href="{% url 'show_all_profiles' %}">Show All Profile</a></li>
+                    <li><a href="{% url 'show_all_profiles' %}">Show All Profiles</a></li>
                     <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
+
+                    {% if profile %}
+                        <li><a href="{% url 'news_feed' profile.pk %}">News Feed</a></li>
+                    {% endif %}
                 </ul>
             </nav>
 

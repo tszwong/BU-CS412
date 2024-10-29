@@ -2,23 +2,25 @@
 
 {% block content %}
     <main class="grid-container">
-        <article class="one-profile" style="width: 40%; margin-top: auto; margin-bottom: auto; margin-right: 120px; margin-left: 120px;">
-            {% if profile.profile_img %}
-            <img src="{{ profile.profile_img }}" alt="{{ profile.first_name }}'s profile image" style="width:250px; margin-right: 15px;">
-            {% endif %}
-            
-            <div style="margin: 0;">
-                <h1 style="font-size: 35px;">{{ profile.first_name }} {{ profile.last_name }}</h1>
-                <p><strong>City:</strong> {{ profile.city }}</p>
-            </div>
-        </article>
+        <div class="profile-div">
+            <article class="one-profile" style="margin-top: auto; margin-bottom: auto;">
+                {% if profile.profile_img %}
+                <img src="{{ profile.profile_img }}" alt="{{ profile.first_name }}'s profile image" style="width:250px; margin: auto; margin-right: 15px;">
+                {% endif %}
+                
+                <div style="margin: auto;">
+                    <h1 style="font-size: 35px;">{{ profile.first_name }} {{ profile.last_name }}</h1>
+                    <p><strong>City:</strong> {{ profile.city }}</p>
+                </div>
+            </article>
+        </div>
 
         <div class="msgs-div">
             <h2>Status Messages</h2>
             {% for status in profile.status_messages.all %}
             <article>
             <div>
-                {{ profile.first_name }} {{ profile.last_name }} at {{ status.timestamp }}
+                <strong>{{ profile.first_name }} {{ profile.last_name }}</strong> at {{ status.timestamp }}
                 <br><br>
                 {{ status.message }}
                 <br><br>
@@ -35,10 +37,25 @@
             </article>
             {% endfor %}
 
-            <div style="margin-top: 30px; margin-left: 15px;">
+            <div class="center-content" style="margin-top: 30px; margin-left: 15px;">
                 <a href="{% url 'create_status' profile.pk %}" class="submit-btn">Add New Status</a>
                 <a href="{% url 'update_profile' profile.pk %}" class="submit-btn">Update Profile</a>
             </div>
+        </div>
+
+        <div class="friends-div">
+            <h2>{{ profile.first_name }}'s Friends <a href="{% url 'friend_suggestions' profile.pk %}" class="submit-btn" style="margin-left: 50px; background-color: green; border-radius: 50px;">Friend Suggestions</a></h2>
+            <div class="friends-div-inner">
+            {% for friend in profile.get_friends %}
+                <div class="div-fix">
+                    <div class="friend-info">
+                        <p>{{ friend.first_name }} {{ friend.last_name }}</p>
+                        {% if friend.profile_img %}
+                        <img src="{{ friend.profile_img }}" alt="{{ friend.first_name }}'s profile image" style="width:150px;">
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </main>
 {% endblock %}
