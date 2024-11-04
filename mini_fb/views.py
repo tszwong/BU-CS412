@@ -7,6 +7,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from .models import Friend, Image, Profile, StatusMessage
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm
 
