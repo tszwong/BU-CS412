@@ -4,15 +4,21 @@
 
 {% block content %}
     <h2 class="center-content">Create Profile</h2>
-    <form method="POST" class="profile-form">
+    <form method="POST" class="profile-form" style="padding-left: 20px;">
         {% csrf_token %}
+        <h3>User Registration</h3>
+        <table class="form-table">
+            {{ user_form.as_table }}
+        </table>
+        <br><br>
+        <h3>Profile Information</h3>
         <table class="form-table">
             {{ form.as_table }}
             <tr>
                 <td></td>
                 <td class="center-content">
                     <input type="submit" value="Create Profile" class="submit-btn">
-                    <a href="{% url 'show_all_profiles'%}" class="submit-btn">Cancel</a>
+                    <a href="{% url 'show_all_profiles' %}" class="submit-btn">Cancel</a>
                 </td>
             </tr>
         </table>

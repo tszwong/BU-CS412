@@ -29,22 +29,30 @@
                         <img src="{{ img.image_file.url }}" alt="Image for status" style="width:150px;">
                     {% endfor %}
                 </div>
-                <div style="margin-top: 15px;">
-                    <a href="{% url 'update_status' status.pk %}" class="submit-btn" style="margin-top: 10px;">Update Status</a>
-                    <a href="{% url 'delete_status' status.pk %}" class="submit-btn" style="background-color: rgb(179, 41, 41);">Delete</a>
-                </div>
+                {% if request.user.is_authenticated and request.user == profile.user %}
+                    <div style="margin-top: 15px;">
+                        <a href="{% url 'update_status' status.pk %}" class="submit-btn" style="margin-top: 10px;">Update Status</a>
+                        <a href="{% url 'delete_status' status.pk %}" class="submit-btn" style="background-color: rgb(179, 41, 41);">Delete</a>
+                    </div>
+                {% endif %}
             </div>
             </article>
             {% endfor %}
 
-            <div class="center-content" style="margin-top: 30px; margin-left: 15px;">
-                <a href="{% url 'create_status' profile.pk %}" class="submit-btn">Add New Status</a>
-                <a href="{% url 'update_profile' profile.pk %}" class="submit-btn">Update Profile</a>
-            </div>
+            {% if request.user.is_authenticated and request.user == profile.user %}
+                <div class="center-content" style="margin-top: 30px; margin-left: 15px;">
+                    <a href="{% url 'create_status' %}" class="submit-btn">Add New Status</a>
+                    <a href="{% url 'update_profile' %}" class="submit-btn">Update Profile</a>
+                </div>
+            {% endif %}
         </div>
 
         <div class="friends-div">
-            <h2>{{ profile.first_name }}'s Friends <a href="{% url 'friend_suggestions' profile.pk %}" class="submit-btn" style="margin-left: 50px; background-color: green; border-radius: 50px;">Friend Suggestions</a></h2>
+            
+            <h2>{{ profile.first_name }}'s Friends 
+                <a href="{% url 'friend_suggestions' %}" class="submit-btn" style="margin-left: 50px; background-color: green; border-radius: 50px;">Friend Suggestions</a>
+            </h2>            
+            
             <div class="friends-div-inner">
             {% for friend in profile.get_friends %}
                 <div class="div-fix">

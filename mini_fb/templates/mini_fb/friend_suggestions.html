@@ -12,7 +12,9 @@
             {% endif %}
             <div class="suggestion-info">
                 <h3>{{ suggestion.first_name }} {{ suggestion.last_name }}</h3>
-                <a href="{% url 'add_friend' profile.pk suggestion.pk %}" class="add-friend-btn">Add Friend</a>
+                {% if request.user.is_authenticated and request.user == profile.user %}
+                    <a href="{% url 'add_friend' suggestion.pk %}" class="add-friend-btn">Add Friend</a>
+                {% endif %}
             </div>
         </div>
         {% endfor %}

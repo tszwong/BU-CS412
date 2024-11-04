@@ -26,7 +26,7 @@ class CreateStatusMessageForm(forms.ModelForm):
             relates this form to the StatusMessage model
         """
         model = StatusMessage
-        fields = ['message', 'profile']
+        fields = ['message']
 
 
 class UpdateProfileForm(forms.ModelForm):

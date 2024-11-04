@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 class Profile(models.Model):
     """
@@ -14,6 +15,9 @@ class Profile(models.Model):
     city = models.TextField(blank=False)
     email = models.EmailField(blank=False)
     profile_img = models.URLField(blank=False)
+
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
 
     def get_status_messages(self):

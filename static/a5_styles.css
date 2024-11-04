@@ -126,6 +126,17 @@ article p {
     background-color: #575757;
 }
 
+.logout-button {
+    background-color: #4c63af;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+}
+
 .profile-form {
     margin: 20px auto;
     border: 1px solid #ccc;
@@ -136,6 +147,7 @@ article p {
 .form-table {
     width: 100%;
     border-spacing: 10px;
+    text-align: left;
 }
 
 .submit-btn {
@@ -228,7 +240,7 @@ textarea {
     box-sizing: border-box;
 }
 
-input[type="text"], input[type="email"], input[type="url"], textarea {
+input[type="text"], input[type="email"], input[type="url"], input[type="password"], textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;

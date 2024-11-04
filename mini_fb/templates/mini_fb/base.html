@@ -21,11 +21,30 @@
                     <li><a href="{% url 'show_all_profiles' %}">Show All Profiles</a></li>
                     <li><a href="{% url 'create_profile' %}">Create New Profile</a></li>
 
-                    {% if profile %}
-                        <li><a href="{% url 'news_feed' profile.pk %}">News Feed</a></li>
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.profile %}
+                            <li><a href="{% url 'news_feed' %}">News Feed</a></li>
+                            <li><a href="{% url 'show_profile' request.user.profile.pk %}">My Profile</a></li>
+                        {% endif %}
+                        <li>
+                            <form id="logout-form" action="{% url 'logout' %}" method="post" style="display: inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="logout-button">Log Out</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Login</a></li>
                     {% endif %}
                 </ul>
             </nav>
+
+            <div>
+                {% if request.user.is_authenticated %}
+                    <p style="margin: 0 auto;">Logged in user: {{ request.user }}.</p>
+                {% else %}
+                    <p style="margin: 0 auto;">Not logged in.</p>
+                {% endif %}
+            </div>
 
         </div>
 
