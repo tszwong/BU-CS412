@@ -213,7 +213,7 @@ class CreateFriendView(LoginRequiredMixin, django.views.generic.View):
         return redirect('show_profile', pk=profile.pk)
         
 
-class ShowFriendSuggestionsView(DetailView):
+class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
     """
         View to handle showing friend suggestions
     """

@@ -49,9 +49,11 @@
 
         <div class="friends-div">
             
+            {% if request.user.is_authenticated and request.user == profile.user %}
             <h2>{{ profile.first_name }}'s Friends 
                 <a href="{% url 'friend_suggestions' %}" class="submit-btn" style="margin-left: 50px; background-color: green; border-radius: 50px;">Friend Suggestions</a>
-            </h2>            
+            </h2>
+            {% endif %}
             
             <div class="friends-div-inner">
             {% for friend in profile.get_friends %}
