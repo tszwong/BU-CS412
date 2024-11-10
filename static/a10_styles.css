@@ -1,0 +1,189 @@
+body {
+    margin: 0;
+}
+
+.nav-bar {
+    background-color: darkgray;
+    color: white;
+}
+
+.nav-bar a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+.nav-bar a:hover {
+    background-color: lightblue;
+    color: black;
+    transition: 0.5s;
+}
+
+.nav-bar li {
+    list-style: none;
+    margin-right: 5px;
+    padding: 10px 0px;
+}
+
+.nav-bar ul {
+    background-color: darkgray;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+}
+
+.voters-table {
+    width: 100%;
+    border-spacing: 0;
+    /* margin-top: 20px; */
+    padding: 10px;
+    text-align: left;
+}
+
+.center-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #333;
+    color: white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: 0 auto;
+    background-color: lightblue;
+}
+
+table a {
+    color: black;
+    text-decoration: none;
+}
+
+table a:hover {
+    color: white;
+    background-color: black;
+    transition: 0.5s;
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+table tr {
+    border-bottom: 1px solid darkgray;
+}
+
+table td, th {
+    padding: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+table th {
+    background-color: darkgray;
+}
+
+form {
+    margin: 0 auto;
+    background-color: lightgray;
+}
+
+form table {
+    width: 50%;
+    table-layout: fixed;
+    background-color: lightgray;
+    margin: 0;
+    padding-top: 15px;
+    padding-left: 15px;
+}
+
+form table tr {
+    border-bottom: 0;
+}
+
+form table td {
+    padding: 0;
+    padding: 10px 30px 10px 15px;
+}
+
+#pagination-row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0 auto;
+    background-color: darkgray;
+}
+
+#pagination-row ul {
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    justify-content: center;
+}
+
+#pagination-row li {
+    font-weight: bold;
+    list-style: none;
+    margin-right: 10px;
+}
+
+#pagination-row a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+#pagination-row a:hover {
+    background-color: lightblue;
+    color: black;
+    transition: 0.5s;
+}
+
+.back-to {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    background-color: lightblue;
+    text-decoration: none;
+}
+
+.back-to a {
+    color: white;
+    text-decoration: none;
+}
+
+.back-to a:hover {
+    color: black;
+    background-color: lightblue;
+    transition: 0.5s;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.centered-div {
+    width: 100%;
+    max-width: 600px;
+    text-align: left;
+}
+
+.mini-container {
+    margin: 20px;
+    background-color: lightgray;
+    padding: 20px 80px;
+}
+
+.mini-container li {
+    list-style: none;
+}
+
+.mini-container ul {
+    padding-left: 0;
+    line-height: 35px;
+}

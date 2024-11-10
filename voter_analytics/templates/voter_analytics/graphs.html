@@ -1,0 +1,25 @@
+<!-- voter_analytics/graphs.html -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+    <a class="back-to" href="{% url 'voters' %}">Back to Voter List</a>
+
+    <h1 style="text-align: center;">Voter Data Graphs</h1>
+
+    <div class="mini-container">
+        <h2>Distribution of Voters by Year of Birth</h2>
+        <div>{{ birth_year_chart|safe }}</div>
+    </div>
+
+    <div class="mini-container">
+        <h2>Party Affiliation Distribution</h2>
+        <div>{{ party_chart|safe }}</div>
+    </div>
+
+    <div class="mini-container">
+        <h2>Voter Participation in Elections</h2>
+        <div>{{ election_chart|safe }}</div>
+    </div>
+
+{% endblock %}

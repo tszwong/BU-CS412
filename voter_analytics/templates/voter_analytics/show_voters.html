@@ -1,0 +1,69 @@
+<!-- voter_analytics/show_voters.html -->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+    <div class="row">
+        {% include "voter_analytics/search.html" %}    
+    </div>
+
+    <table class="voters-table">
+        <h2 class="center-content">Voters</h2>
+        <tr id="table-cols">
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Date of Birth</th>
+            <th>Party Affiliation</th>
+            <th>Voter Score</th>
+            <th></th>
+            <!-- <th>Voted in 2020 State Election</th>
+            <th>Voted in 2021 Town Election</th>
+            <th>Voted in 2021 Primary Election</th>
+            <th>Voted in 2022 General Election</th>
+            <th>Voted in 2023 Town Election</th> -->
+
+        {% for voter in voters %}
+            <tr>
+                <td>{{ voter.first_name }}</td>
+                <td>{{ voter.last_name }}</td>
+                <td>{{ voter.street_number }} {{ voter.street_name }}{% if voter.apartment_number %} Apt. {{ voter.apartment_number }}{% endif %}, {{ voter.zip_code }}</td>
+                <td>{{ voter.dob }}</td>
+                <td>{{ voter.party_affiliation }}</td>
+                <td>{{ voter.voter_score }}</td>
+                <!-- <td>{{ voter.v20state }}</td>
+                <td>{{ voter.v21town }}</td>
+                <td>{{ voter.v21primary }}</td>
+                <td>{{ voter.v22general }}</td>
+                <td>{{ voter.v23town }}</td> -->
+                <td><a href="{% url 'voter' voter.pk %}" style="text-decoration: none;">View Details</a></td>
+            </tr>
+
+        {% empty %}
+            <tr>
+                <td>No voters found.</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <div class="row" id="pagination-row">
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+             
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

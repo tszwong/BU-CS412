@@ -28,7 +28,9 @@ urlpatterns = [
     path("restaurant/", include("restaurant.urls")),
     path('mini_fb/', include('mini_fb.urls')),
     path('blog/', include('blog.urls')),
-    path('', include('mini_fb.urls')),
+    path('marathon/', include('marathon_analytics.urls')),
+    path('voter/', include('voter_analytics.urls')),
+    path('', include('voter_analytics.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

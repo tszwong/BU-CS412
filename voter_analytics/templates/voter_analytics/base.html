@@ -1,0 +1,26 @@
+<!-- voter_analytic/templates/voter_analytic/base.html -->
+{% load static %}
+
+<html>
+    <head>
+        <title>Voter Analytics</title>
+        <link rel="stylesheet" href="{% static 'a10_styles.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav class="nav-bar">
+            <h1 style="padding: 10px 20px; margin-top: 0; margin-bottom: 0; background-color: #333;">Voter Analytics</h1>
+            <ul>
+                <li><a href="{% url 'voters' %}">Voters</a></li>
+                <li><a href="{% url 'graphs' %}">Graphs</a></li>
+            </ul>
+        </nav>  
+
+        {% block content %}
+        <!-- put the specific stuff here -->
+        {% endblock %}
+    </body>
+</html>
