@@ -10,7 +10,7 @@ __pycache__/
 *$py.class
 
 # Ignore Django migrations
-*/migrations/*
+# */migrations/*
 
 # Ignore database files
 db.sqlite3
