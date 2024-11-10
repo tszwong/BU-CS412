@@ -1,5 +1,8 @@
 # Ignore virtual environment
 venv/
+myenv/
+
+cs412/__pycache__
 
 # Ignore Python bytecode
 __pycache__/
