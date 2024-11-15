@@ -1,0 +1,23 @@
+<!-- wt_scrooge_capital/watch_list.html -->
+{% load static %}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'final_styles.css' %}">
+    </head>
+    <body>
+        <div class="content-block">
+            <h2 class="space-it">General Watch List</h2>
+            <div class="gw-rec-container">
+                {% for stock in stocks %}
+                <div class="gw-rec-card">
+                    <button>remove</button>
+                    <h4>Company: {{ stock.company_name }}</h4>
+                    <h3>{{ stock.ticker }}</h3>
+                    <h2>$<span style="padding-left: 3px">{{ stock.current_price }}</span></h2>
+                </div>
+                {% endfor %}
+            </div>
+        </div>  
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<!-- wt_scrooge_capital/templates/wt_scrooge_capital/base.html -->
+{% load static %}
+
+<html>
+    <head>
+        <!-- <link rel="stylesheet" href="/static/styles.css"> -->
+        <link rel="stylesheet" href="{% static 'final_styles.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+        <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+        <title>WT. Scrooge Capital</title>
+    </head>
+    <body>
+        <div class="ad" style="align-items: center; display: flex; justify-content: center; width: 100vw; padding-top: 10px; padding-bottom: 10px; font-size: 18px;">
+            <p><span style="font-weight: bold;">Flash Offer:</span> Sign up for an account and receive one random stock from the S&P 500 list!</p>
+        </div>
+        <nav class="nav-bar">
+            <div>
+                <div class="nav-bar-links">
+                    <ul>
+                        <li>
+                            <a href="{% url 'home' %}"><img src="{% static 'wt_logo_small.png' %}" style="width: 70px; height: auto;"></a>
+                        </li>
+                        <li>
+                            <h1>WT. Scrooge Capital</h1>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav-bar-links" style="margin-top: 25px;">
+                    <ul>
+                        <li>
+                            <a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>
+                            <input type="text" placeholder="Search" style="padding: 5px 40px;">
+                        </li>
+                        <li>
+                            <a href="{% url 'portfolio' %}">Portfolio</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'watchlist' %}">Watchlist</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'transactions' %}">Transaction History</a>
+                        </li>
+                    </ul>
+        
+                    <ul>
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'profile' %}" style="text-transform: uppercase;">{{ user.username }}</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'login' %}">Login</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'signup' %}">Sign Up</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="content">
+            {% block content %}
+            <!-- put the specific stuff here -->
+            {% endblock %}
+        </div>
+
+        <footer>
+            <p>WT. Scrooge Capital &copy; 2024</p>
+        </footer>
+    </body>
+</html>
