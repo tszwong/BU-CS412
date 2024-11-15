@@ -10,5 +10,5 @@ urlpatterns = [
     path('transactions/', TransactionsView.as_view(), name='transactions'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='wt_scrooge_capital/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+        path('logout/', auth_views.LogoutView.as_view(template_name='wt_scrooge_capital/logged_out.html'), name='logout'),
 ]
