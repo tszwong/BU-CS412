@@ -30,7 +30,7 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('marathon/', include('marathon_analytics.urls')),
     path('voter/', include('voter_analytics.urls')),
-    path('scrooge_capital/', include('wt_scrooge_capital.urls')),
+    path('wt_scrooge_capital/', include('wt_scrooge_capital.urls')),
     path('', include('wt_scrooge_capital.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

@@ -37,7 +37,7 @@ body {
     margin: 0 20px;
 }
 
-.nav-bar-links ul li a, .nav-bar-links p {
+.nav-bar-links ul li a, .nav-bar-links p, .nav-bar-links ul li button {
     margin: 0 auto;
     text-decoration: none;
     color: rgb(18, 18, 18);
@@ -85,14 +85,15 @@ body {
 .transact-container {
     display: flex;
     flex-direction: column;
-    width: 79%;
+    width: 60%;
     margin: 0 auto;
     margin-top: 50px;
     margin-bottom: 50px;
-    color: rgb(255, 255, 255);
-    background-color: rgb(18, 18, 18);
+    /* color: rgb(255, 255, 255);
+    background-color: rgb(18, 18, 18); */
     padding: 20px 20px;
-    border-radius: 8px;
+    border: 1px solid rgb(18, 18, 18);
+    border-radius: 25px;
 }
 
 .transact-card {
@@ -102,7 +103,7 @@ body {
     /* margin-right: 20px; */
     padding-top: 20px;
     padding-bottom: 20px;
-    border-bottom: 2px solid rgb(255, 255, 255);
+    border-bottom: 1px solid rgb(18, 18, 18);
 }
 
 .transact-card:last-child {
@@ -114,19 +115,18 @@ body {
 }
 
 .transact-card.sell {
-    color: rgb(255, 80, 0);
+    color: rgb(0, 76, 255);
 }
 
 footer {
-    margin-top: 200px;
+    /* margin-top: 200px; */
     text-align: center;
-    padding: 10px;
-    bottom: 0;
     width: 100%;
+    padding: 10px 0;
 }
 
 .space-it {
-    width: 85%;
+    width: 82%;
     margin: 0 auto;
 }
 
@@ -135,7 +135,14 @@ footer {
 }
 
 .content {
-    height: 95vh;
+    flex: 1;
+    padding: 20px;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .ad {
@@ -145,4 +152,208 @@ footer {
 .ad h3 {
     margin: 0;
     padding: 10px;
+
+}
+
+.login-container, .signup-container {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 200px;
+    /* text-align: center; */
+    align-items: center;
+    margin-bottom: 200px;
+}
+
+.signup-container {
+    margin-bottom: 600px;
+}
+
+.signup-container {
+    margin-top: 100px;
+    align-items: normal;
+}
+
+.login-container h2, .signup-container h2 {
+    margin-bottom: 40px;
+}
+
+.login-container form, .signup-container form {
+    align-items: center;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"],
+.signup-container input[type="text"],
+.signup-container input[type="password"],
+.signup-container input[type="email"],
+.signup-container input[type="date"] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-container input[type="submit"], 
+.signup-container input[type="submit"],
+.submit-btn {
+    margin-top: 30px;
+    padding: 10px 50px;
+    background-color: rgb(18, 18, 18);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: rgb(67, 67, 67);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+.left {
+    width: 50%;
+}
+
+.right {
+    width: 50%;
+    position: absolute;
+    right: 0;
+}
+
+.sign_up_link {
+    margin-top: 50px;
+}
+
+.sign_up_link a {
+    color: rgb(18, 18, 18);
+    font-weight: bold;
+}
+
+#cancel {
+    text-decoration: none;
+    padding-top: 8px;
+    margin-left: 5px;
+}
+
+.profile-form {
+    margin-left: 20px;
+}
+
+.price-chart {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.additional-info-section {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 80px;
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+    border-radius: 8px;
+    position: relative;
+    margin-top: 25px;
+}   
+
+.additional-info-content p {
+    padding: 10px 20px;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.info-content {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+}
+
+#ad-info-title {
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(18, 18, 18);
+    width: 20%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    margin-top: 15px;
+    padding: 5px 0px;
+    border-radius: 20px;
+}
+
+.space {
+    padding-left: 5px;
+    color: rgb(18, 18, 18);
+}
+
+.info-header {
+    margin-left: 30px;
+}
+
+#info-header-title {
+    margin-top: 15px;
+    margin-left: 150px;
+    margin-bottom: 50px;
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+    width: 17%;
+    padding-left: 12px;
+    padding-right: 5px;
+    padding-top: 1px;
+    padding-bottom: 2px;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.portfolio-container {
+    border: 1px solid rgb(18, 18, 18);
+    border-radius: 55px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.portfolio-description {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 60%;
+    text-align: center;
+}
+
+.portfolio-table {
+    justify-content: center;
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 80px;
+    margin-bottom: 100px;
+}
+
+.portfolio-table-item {
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 8px;
+}
+
+.portfolio-table th {
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+#portfolio-hr {
+    width: 72%;
+    margin: 0 auto;
+    margin-top: 70px;
+    margin-bottom: 30px;
 }

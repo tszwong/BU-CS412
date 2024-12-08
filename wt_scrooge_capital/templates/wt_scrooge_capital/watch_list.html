@@ -13,7 +13,7 @@
                 <div class="gw-rec-card">
                     <button>remove</button>
                     <h4>Company: {{ stock.company_name }}</h4>
-                    <h3>{{ stock.ticker }}</h3>
+                    <h3><a href="{% url 'stock_detail' stock.id %}" style="text-decoration: none;">{{ stock.ticker }}</a></h3>
                     <h2>$<span style="padding-left: 3px">{{ stock.current_price }}</span></h2>
                 </div>
                 {% endfor %}

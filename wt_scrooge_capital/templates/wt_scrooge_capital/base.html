@@ -12,70 +12,82 @@
         <title>WT. Scrooge Capital</title>
     </head>
     <body>
-        <div class="ad" style="align-items: center; display: flex; justify-content: center; width: 100vw; padding-top: 10px; padding-bottom: 10px; font-size: 18px;">
-            <p><span style="font-weight: bold;">Flash Offer:</span> Sign up for an account and receive one random stock from the S&P 500 list!</p>
-        </div>
-        <nav class="nav-bar">
-            <div>
-                <div class="nav-bar-links">
-                    <ul>
-                        <li>
-                            <a href="{% url 'home' %}"><img src="{% static 'wt_logo_small.png' %}" style="width: 70px; height: auto;"></a>
-                        </li>
-                        <li>
-                            <h1>WT. Scrooge Capital</h1>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="nav-bar-links" style="margin-top: 25px;">
-                    <ul>
-                        <li>
-                            <a href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li>
-                            <input type="text" placeholder="Search" style="padding: 5px 40px;">
-                        </li>
-                        <li>
-                            <a href="{% url 'portfolio' %}">Portfolio</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'watchlist' %}">Watchlist</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'transactions' %}">Transaction History</a>
-                        </li>
-                    </ul>
-        
-                    <ul>
-                        {% if user.is_authenticated %}
-                            <li>
-                                <a href="{% url 'profile' %}" style="text-transform: uppercase;">{{ user.username }}</a>
-                            </li>
-                            <li>
-                                <form method="post" action="{% url 'logout' %}" style="display: inline;">
-                                    {% csrf_token %}
-                                    <button type="submit" style="background: none; border: none; color: inherit; cursor: pointer; padding: 0; font: inherit;">Logout</button>
-                                </form>
-                            </li>
-                        {% else %}
-                            <li>
-                                <a href="{% url 'login' %}">Login</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
+        <div class="page-container">
+            <div class="ad" style="align-items: center; display: flex; justify-content: center; width: 100vw; padding-top: 10px; padding-bottom: 10px; font-size: 18px;">
+                <p><span style="font-weight: bold;">Flash Offer:</span> Sign up for an account and receive one random stock from the S&P 500 list!</p>
             </div>
-        </nav>
-        
-        <div class="content">
-            {% block content %}
-            <!-- put the specific stuff here -->
-            {% endblock %}
+            <nav class="nav-bar">
+                <div>
+                    <div class="nav-bar-links">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}"><img src="{% static 'wt_logo_small.png' %}" style="width: 70px; height: auto;"></a>
+                            </li>
+                            <li>
+                                <h1>WT. Scrooge Capital</h1>
+                            </li>
+                        </ul>
+                    </div>
+    
+                    <div class="nav-bar-links" style="margin-top: 25px;">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Home</a>
+                            </li>
+                            <li>
+                                <input type="text" placeholder="Search" style="padding: 5px 40px;">
+                            </li>
+                            <li>
+                                <a href="{% url 'portfolio' %}">Portfolio</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'watchlist' %}">Watchlist</a>
+                            </li>
+                            <!-- <li>
+                                <a href="{% url 'transactions' %}">Transaction History</a>
+                            </li> -->
+                        </ul>
+            
+                        <ul>
+                            {% if user.is_authenticated %}
+                                <li>
+                                    <a href="{% url 'profile' %}" 
+                                        style="
+                                            text-transform: uppercase; 
+                                            background-color: rgb(204, 255, 0); 
+                                            padding-left: 20px; 
+                                            padding-right: 20px;
+                                            border-radius: 15px;
+                                        "
+                                    >
+                                        {{ user.username }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" style="background: none; border: none; cursor: pointer; font-size: 17px;">Logout</button>
+                                    </form>
+                                </li>
+                            {% else %}
+                                <li>
+                                    <a href="{% url 'login' %}">Login</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="content">
+                {% block content %}
+                <!-- put the specific stuff here -->
+                {% endblock %}
+            </div>
+    
+            <footer>
+                <p>WT. Scrooge Capital &copy; 2024</p>
+            </footer>
         </div>
-
-        <footer>
-            <p>WT. Scrooge Capital &copy; 2024</p>
-        </footer>
     </body>
 </html>

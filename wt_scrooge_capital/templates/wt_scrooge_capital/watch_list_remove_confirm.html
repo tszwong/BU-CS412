@@ -1,0 +1,22 @@
+<!-- watch_list_remove_confirm.html -->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin: 0 auto;">
+    <div>
+        <h2>Remove Stock from Watch List</h2>
+        <p>Company: {{ stock.company_name }}</p>
+        <p>Stock Ticker: {{ stock.ticker }}</p>
+        <p>Are you sure you want to remove this stock from your watch list?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Confirm Remove" class="submit-btn">
+        </form>
+        
+        <form method="GET" action="{% url 'watchlist' %}">
+            <input type="submit" value="Cancel" class="submit-btn">
+        </form>
+    </div>
+</div>
+{% endblock %}

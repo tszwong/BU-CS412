@@ -1,0 +1,33 @@
+<!-- wt_scrooge_capital/templates/wt_scrooge_capital/signup.html -->
+
+{% extends 'wt_scrooge_capital/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="signup-container">
+        <div class="left">
+            <h2 class="center-content">Create Your Profile</h2>
+            <img src="{% static 'wt_logo_big.png' %}" style="width: 200px; height: auto;">
+        </div>
+        <div class="right">
+            <form method="POST" class="profile-form">
+                {% csrf_token %}
+                <h2>User Registration</h2>
+                {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="form-error">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                
+                <input type="submit" value="Sign Up" class="submit-btn">
+                <a href="{% url 'home' %}" class="submit-btn" id="cancel">Cancel</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

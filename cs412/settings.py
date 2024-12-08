@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "marathon_analytics",
     "voter_analytics",
     "wt_scrooge_capital",
+    "db_examples",
 ]
 
 MIDDLEWARE = [
@@ -156,5 +157,5 @@ STORAGES = {
     },
 }
 
-LOGIN_URL = '/mini_fb/login/'
-LOGIN_REDIRECT_URL = '/mini_fb/'
+LOGIN_URL = '/wt_scrooge_capital/login/'
+LOGIN_REDIRECT_URL = '/wt_scrooge_capital/'

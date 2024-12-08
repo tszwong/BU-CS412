@@ -1,0 +1,38 @@
+{% extends 'wt_scrooge_capital/base.html' %}
+
+{% block content %}
+    <div class="portfolio-container">
+        <div class="portfolio-description">
+            <h2 id="portfolio-title">Portfolio</h2>
+            <p>Total Shares: {{ portfolio_total_shares }}</p>
+            <p>Total Value: ${{ portfolio_total_value }}</p>
+        </div>
+
+        <hr id="portfolio-hr">
+
+        <table class="portfolio-table">
+            <thead>
+                <tr>
+                    <th class="portfolio-table-item">Stock</th>
+                    <th class="portfolio-table-item">Shares</th>
+                    <th class="portfolio-table-item">Purchase Price</th>
+                    <th class="portfolio-table-item">Purchase Date</th>
+                    <th class="portfolio-table-item">Current Price</th>
+                    <th class="portfolio-table-item">Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in portfolio %}
+                <tr>
+                    <td class="portfolio-table-item">{{ item.stock.company_name }} ({{ item.stock.ticker }})</td>
+                    <td class="portfolio-table-item">{{ item.shares }}</td>
+                    <td class="portfolio-table-item">${{ item.purchase_price }}</td>
+                    <td class="portfolio-table-item">{{ item.purchase_date }}</td>
+                    <td class="portfolio-table-item">${{ item.stock.current_price }}</td>
+                    <td class="portfolio-table-item">${{ item.total_value|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
