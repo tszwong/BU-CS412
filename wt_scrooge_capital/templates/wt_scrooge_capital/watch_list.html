@@ -9,9 +9,9 @@
         <div class="content-block">
             <h2 class="space-it">General Watch List</h2>
             <div class="gw-rec-container">
-                {% for stock in stocks %}
+                {% for stock in stocks|slice:":3" %}
                 <div class="gw-rec-card">
-                    <button>remove</button>
+                    <!-- <button>remove</button> -->
                     <h4>Company: {{ stock.company_name }}</h4>
                     <h3><a href="{% url 'stock_detail' stock.id %}" style="text-decoration: none;">{{ stock.ticker }}</a></h3>
                     <h2>$<span style="padding-left: 3px">{{ stock.current_price }}</span></h2>

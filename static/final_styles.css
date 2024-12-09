@@ -45,7 +45,11 @@ body {
 }
 
 .nav-bar-links ul li a:hover {
-    color: #d3d3d3;
+    background-color: rgb(204, 255, 0);
+    color: rgb(18, 18, 18);
+    padding: 5px 15px;
+    transition: 0.5s;
+    border-radius: 10px;
 }
 
 .nav-bar-logo {
@@ -78,8 +82,66 @@ body {
     margin: 0 auto;
     margin-left: 15px;
     margin-right: 15px;
-    border-radius: 8px;
+    border-radius: 30px;
     width: 33%;
+}
+
+.watch-rec-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 85%;
+    /* border: 1px solid rgb(18, 18, 18); */
+    border-radius: 4px;
+    margin: 0 auto;
+    padding: 50px 50px;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+}
+
+.watch-rec-card {
+    /* background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255); */
+    padding: 30px 50px;
+    margin: 0 auto;
+    margin-top: 45px;
+    border: 1px solid rgb(18, 18, 18);
+    border-radius: 40px;
+    width: 50%;
+}
+
+.watch-rec-card h3, .watch-rec-card h4, .watch-rec-card p {
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    width: 50%;
+}
+
+.watch-rec-card h3 {
+    font-size: 24px;
+}
+
+.watch-rec-card h4 {
+    font-size: 20px;
+}
+
+.watch-rec-card button, .gw-rec-card button {
+    margin: 0 auto;
+    padding: 8px 15px;
+    background-color: rgb(188, 25, 25);
+    color: white;
+    border-radius: 25px;
+    border: none;
+}
+
+.gw-rec-card button {
+    background-color: rgb(0, 200, 5);
+}
+
+.watch-rec-card button:hover, .gw-rec-card button:hover {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: rgb(18, 18, 18);
+    transition: 0.5s;
 }
 
 .transact-container {
@@ -96,18 +158,34 @@ body {
     border-radius: 25px;
 }
 
+#transaction-title {
+    padding: 10px 10px;
+    background-color: rgb(18, 18, 18);
+    width: 30%;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin-left: 16px;
+    border-radius: 15px;
+}
+
 .transact-card {
-    width: 96%;
-    /* margin: 0 auto; */
-    margin-left: 20px;
+    width: 60%;
+    margin: 0 auto;
+    /* margin-left: 20px; */
     /* margin-right: 20px; */
     padding-top: 20px;
     padding-bottom: 20px;
-    border-bottom: 1px solid rgb(18, 18, 18);
+}
+
+.transact-hr {
+    border: 0.8px solid rgb(18, 18, 18);
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    width: 60% !important;
 }
 
 .transact-card:last-child {
-    border-bottom: none;
+    border: none;
 }
 
 .transact-card.buy {
@@ -115,7 +193,7 @@ body {
 }
 
 .transact-card.sell {
-    color: rgb(0, 76, 255);
+    color: rgb(217, 29, 29);
 }
 
 footer {
@@ -152,7 +230,6 @@ footer {
 .ad h3 {
     margin: 0;
     padding: 10px;
-
 }
 
 .login-container, .signup-container {
@@ -323,6 +400,17 @@ footer {
     width: 80%;
     margin: 0 auto;
     margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+#portfolio-title {
+    width: 50%;
+    padding: 20px 10px;
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+    margin: 0 auto;
+    margin-bottom: 60px;
+    border-radius: 50px;
 }
 
 .portfolio-description {
@@ -330,6 +418,10 @@ footer {
     margin-top: 50px;
     width: 60%;
     text-align: center;
+}
+
+.portfolio-description p {
+    font-size: 18px;
 }
 
 .portfolio-table {
@@ -341,9 +433,9 @@ footer {
 }
 
 .portfolio-table-item {
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-top: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
 }
 
 .portfolio-table th {
@@ -352,8 +444,57 @@ footer {
 }
 
 #portfolio-hr {
-    width: 72%;
+    width: 80%;
     margin: 0 auto;
     margin-top: 70px;
     margin-bottom: 30px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+
+.pagination a {
+    padding: 3px 8px;
+    margin: 0 5px;
+    border: 1px solid rgb(18, 18, 18);
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(18, 18, 18);
+}
+
+.pagination a:hover {
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+    transition: 0.5s;
+}
+
+.buy-sell-form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 80%;
+}
+
+#sell-btn {
+    background-color: rgb(204, 255, 0);
+    color: rgb(18, 18, 18);
+    padding: 10px 105px;
+    /* border: 1px solid rgb(18, 18, 18); */
+    border: none;
+    border-radius: 16px;
+    font-size: 18px;
+    margin: 0 auto;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+#sell-btn:hover {
+    background-color: rgb(18, 18, 18);
+    color: rgb(255, 255, 255);
+    transition: 0.5s;
+    cursor: pointer;
 }

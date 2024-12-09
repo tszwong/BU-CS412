@@ -13,7 +13,7 @@
     </head>
     <body>
         <div class="page-container">
-            <div class="ad" style="align-items: center; display: flex; justify-content: center; width: 100vw; padding-top: 10px; padding-bottom: 10px; font-size: 18px;">
+            <div class="ad" style="align-items: center; display: flex; justify-content: center; width: 100vw; font-size: 18px;">
                 <p><span style="font-weight: bold;">Flash Offer:</span> Sign up for an account and receive one random stock from the S&P 500 list!</p>
             </div>
             <nav class="nav-bar">
@@ -21,7 +21,7 @@
                     <div class="nav-bar-links">
                         <ul>
                             <li>
-                                <a href="{% url 'home' %}"><img src="{% static 'wt_logo_small.png' %}" style="width: 70px; height: auto;"></a>
+                                <img src="{% static 'wt_logo_small.png' %}" style="width: 70px; height: auto;">
                             </li>
                             <li>
                                 <h1>WT. Scrooge Capital</h1>
@@ -31,21 +31,12 @@
     
                     <div class="nav-bar-links" style="margin-top: 25px;">
                         <ul>
-                            <li>
-                                <a href="{% url 'home' %}">Home</a>
-                            </li>
-                            <li>
-                                <input type="text" placeholder="Search" style="padding: 5px 40px;">
-                            </li>
-                            <li>
-                                <a href="{% url 'portfolio' %}">Portfolio</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'watchlist' %}">Watchlist</a>
-                            </li>
-                            <!-- <li>
-                                <a href="{% url 'transactions' %}">Transaction History</a>
-                            </li> -->
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <!-- <li><input type="text" placeholder="Search" style="padding: 5px 40px;"></li> -->
+                            <li><a href="{% url 'stock_list' %}">All Stocks</a></li>
+                            <li><a href="{% url 'portfolio' %}">Portfolio</a></li>
+                            <li><a href="{% url 'watchlist' %}">Watchlist</a></li>
+                            <!-- <li><a href="{% url 'transactions' %}">Transaction History</a></li> -->
                         </ul>
             
                         <ul>
@@ -57,7 +48,7 @@
                                             background-color: rgb(204, 255, 0); 
                                             padding-left: 20px; 
                                             padding-right: 20px;
-                                            border-radius: 15px;
+                                            border-radius: 5px;
                                         "
                                     >
                                         {{ user.username }}
@@ -70,9 +61,7 @@
                                     </form>
                                 </li>
                             {% else %}
-                                <li>
-                                    <a href="{% url 'login' %}">Login</a>
-                                </li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
                             {% endif %}
                         </ul>
                     </div>
@@ -88,6 +77,7 @@
             <footer>
                 <p>WT. Scrooge Capital &copy; 2024</p>
             </footer>
+
         </div>
     </body>
 </html>

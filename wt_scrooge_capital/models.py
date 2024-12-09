@@ -66,13 +66,10 @@ class Portfolio(models.Model):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_profile = self.get_object()
-        context['profile'] = user_profile
-
-        # Add portfolio data
         portfolio_items = Portfolio.objects.filter(user=user_profile)
+        
         context['portfolio'] = portfolio_items
-
-        # Add individual fields if needed
+        context['profile'] = user_profile
         context['portfolio_total_shares'] = sum(item.shares for item in portfolio_items)
         context['portfolio_total_value'] = sum(item.shares * item.stock.current_price for item in portfolio_items)
 

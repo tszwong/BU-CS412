@@ -4,8 +4,8 @@
     <div class="portfolio-container">
         <div class="portfolio-description">
             <h2 id="portfolio-title">Portfolio</h2>
-            <p>Total Shares: {{ portfolio_total_shares }}</p>
-            <p>Total Value: ${{ portfolio_total_value }}</p>
+            <p>Total Shares : {{ portfolio_total_shares }}</p>
+            <p>Total Value : ${{ portfolio_total_value }}</p>
         </div>
 
         <hr id="portfolio-hr">
@@ -24,7 +24,7 @@
             <tbody>
                 {% for item in portfolio %}
                 <tr>
-                    <td class="portfolio-table-item">{{ item.stock.company_name }} ({{ item.stock.ticker }})</td>
+                    <td class="portfolio-table-item"><a href="{% url 'stock_detail' item.stock.id %}">{{ item.stock.company_name }} ({{ item.stock.ticker }})</a></td>
                     <td class="portfolio-table-item">{{ item.shares }}</td>
                     <td class="portfolio-table-item">${{ item.purchase_price }}</td>
                     <td class="portfolio-table-item">{{ item.purchase_date }}</td>
@@ -34,5 +34,16 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        <hr id="portfolio-hr">
+
+        <div class="buy-sell-form">
+            <h3>Buy or Sell Shares</h3>
+            <form method="post" action="">
+                {% csrf_token %}
+                {{ buy_sell_form.as_p }}
+                <button id="sell-btn" type="submit">Submit</button>
+            </form>
+        </div>
     </div>
 {% endblock %}

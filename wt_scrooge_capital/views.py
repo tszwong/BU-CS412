@@ -1,14 +1,19 @@
+from pyexpat.errors import messages
 from django.db import IntegrityError
-from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render, redirect
+from django.urls import reverse
+from django.views import View
 from .models import Transaction, UserProfile, Portfolio, WatchList, Stock, StockPriceHistory
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin 
 from django.contrib.auth import login
 from django.contrib.auth import views as auth_views
-from .forms import CustomAuthenticationForm, SignupForm
+from .forms import BuySellForm, CustomAuthenticationForm, SignupForm
 from django.views.generic.edit import FormView
 import plotly.express as px
 from plotly.io import to_html
+import datetime
 
 
 class CustomLoginView(auth_views.LoginView):
@@ -57,31 +62,100 @@ class PortfolioView(LoginRequiredMixin, ListView):
         context['portfolio'] = portfolio_items
         context['portfolio_total_shares'] = sum(item.shares for item in portfolio_items)
         context['portfolio_total_value'] = sum(item.shares * item.stock.current_price for item in portfolio_items)
+        context['buy_sell_form'] = BuySellForm()
 
         return context
+    
+
+    def post(self, request, *args, **kwargs):
+        form = BuySellForm(request.POST)
+        user_profile = UserProfile.objects.get(user=request.user)
+        
+        if form.is_valid():
+            stock = form.cleaned_data['stock']
+            action = form.cleaned_data['action']
+            shares = form.cleaned_data['shares']
+
+            portfolio_item, created = Portfolio.objects.get_or_create(user=user_profile, stock=stock, defaults={
+                'shares': 0,
+                'purchase_price': stock.current_price,
+                'purchase_date': datetime.date.today(),
+            })
+
+            if action == 'buy':
+                portfolio_item.shares += shares
+                portfolio_item.purchase_price = stock.current_price
+
+                # update the transaction history
+                Transaction.objects.create(
+                    user=user_profile,
+                    stock=stock,
+                    shares=shares,
+                    purchase_price=stock.current_price,
+                    purchase_date=datetime.date.today(),
+                    transaction_type='buy',
+                )
+                
+            elif action == 'sell':
+                if portfolio_item.shares == 0:
+                    portfolio_item.delete()
+
+                    # update the transaction history   
+                    Transaction.objects.create(
+                        user=user_profile,
+                        stock=stock,
+                        shares=shares,
+                        purchase_price=stock.current_price,
+                        purchase_date=datetime.date.today(),
+                        transaction_type='sell',
+                    )
+
+                    return redirect(reverse('portfolio'))
+                if portfolio_item.shares >= shares:
+                    portfolio_item.shares -= shares
+                    if portfolio_item.shares == 0:
+                        portfolio_item.delete()
+                        return redirect(reverse('portfolio'))
+                    
+                    # update the transaction history   
+                    Transaction.objects.create(
+                        user=user_profile,
+                        stock=stock,
+                        shares=shares,
+                        purchase_price=stock.current_price,
+                        purchase_date=datetime.date.today(),
+                        transaction_type='sell',
+                    )
+                    
+                else:
+                    return redirect(reverse('portfolio'))
+
+            portfolio_item.save()
+            return redirect(reverse('portfolio'))
+
+        return redirect(reverse('portfolio'))
 
     
 
 class WatchlistView(LoginRequiredMixin, ListView):
     """
-        Create a subclass of ListView
+        Displays the user's watchlist
     """
-
     model = WatchList
     template_name = 'wt_scrooge_capital/watchlist_expanded.html'
     context_object_name = 'watchlist'
 
-
     def get_queryset(self):
+
         user_profile = UserProfile.objects.get(user=self.request.user)
         return WatchList.objects.filter(user=user_profile)
-    
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
         context['profile'] = user_profile
         return context
+
     
 
 class TransactionsView(LoginRequiredMixin, ListView):
@@ -93,14 +167,13 @@ class TransactionsView(LoginRequiredMixin, ListView):
     context_object_name = 'transactions'
 
     def get_queryset(self):
-        # Filter transactions for the logged-in user's profile
         user_profile = UserProfile.objects.get(user=self.request.user)
         return Transaction.objects.filter(user=user_profile)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
-        context['profile'] = user_profile  # Optional: Pass the profile for additional context
+        context['profile'] = user_profile
         return context
     
 
@@ -194,5 +267,43 @@ class StockDetailView(LoginRequiredMixin, DetailView):
         else:
             context['shares_owned'] = 0
 
-
         return context
+
+
+class StockListView(LoginRequiredMixin, ListView):
+    """
+        Displays all stocks
+    """
+    model = Stock
+    template_name = 'wt_scrooge_capital/all_stocks.html'
+    context_object_name = 'stocks'
+    paginate_by = 3
+
+
+class RemoveFromWatchlistView(LoginRequiredMixin, View):
+    """
+        Handles the removal of an item from the watchlist
+    """
+    def post(self, request, pk):
+        user_profile = UserProfile.objects.get(user=request.user)
+        watchlist_item = get_object_or_404(WatchList, pk=pk, user=user_profile)
+        watchlist_item.delete()
+        return HttpResponseRedirect(reverse('watchlist'))
+    
+
+class AddToWatchlistView(LoginRequiredMixin, View):
+    """
+        Handles adding a stock to the user's watchlist
+    """
+    def post(self, request, stock_id):
+        user_profile = UserProfile.objects.get(user=request.user)
+        stock = get_object_or_404(Stock, id=stock_id)
+
+        if not WatchList.objects.filter(user=user_profile, stock=stock).exists():
+            WatchList.objects.create(
+                user=user_profile,
+                stock=stock,
+                added_price=stock.current_price,
+                current_price=stock.current_price
+            )
+        return redirect(reverse('stock_list'))

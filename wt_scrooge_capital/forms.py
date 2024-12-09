@@ -1,7 +1,7 @@
 # wt_scrooge_capital/forms.py
 
 from django import forms
-from .models import UserProfile
+from .models import Stock, UserProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
@@ -78,3 +78,9 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ['first_name', 'last_name', 'email', 'dob']
+
+
+class BuySellForm(forms.Form):
+    stock = forms.ModelChoiceField(queryset=Stock.objects.all(), label="Stock")
+    action = forms.ChoiceField(choices=[('buy', 'Buy'), ('sell', 'Sell')], label="Action")
+    shares = forms.IntegerField(min_value=1, label="Shares")
