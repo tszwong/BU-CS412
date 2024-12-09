@@ -1,3 +1,9 @@
+# By: Tsz Kit Wong
+# File: wt_scrooge_capital/models.py
+
+# Models of the app
+
+
 from django.db import models
 
 # Create your models here.
@@ -16,6 +22,9 @@ class UserProfile(models.Model):
 
 
     def __str__(self):
+        """
+            return the full name of the user
+        """
         return f"{self.first_name} {self.last_name}"
 
 
@@ -29,6 +38,9 @@ class Stock(models.Model):
 
 
     def __str__(self):
+        """
+            return the company name, ticker, and current price of the stock
+        """
         return f"{self.company_name}, ({self.ticker}), current_price: ${self.current_price}"
     
 
@@ -44,11 +56,18 @@ class StockPriceHistory(models.Model):
     type = models.CharField(max_length=50)
     price_history = models.TextField(blank=False, default="")
 
+
     def get_price_history(self):
+        """"
+            return the price history of the stock
+        """
         return [float(price) for price in self.price_history.split(",") if price]
 
 
     def __str__(self):
+        """
+            return the stock ticker, date, open price, and close price  
+        """
         return f"{self.stock.ticker} on {self.date}, open_price: ${self.open_price}, close_price: ${self.close_price}"
 
 
@@ -64,6 +83,10 @@ class Portfolio(models.Model):
 
 
     def get_context_data(self, **kwargs):
+        """
+            return the context data of the portfolio
+        """
+
         context = super().get_context_data(**kwargs)
         user_profile = self.get_object()
         portfolio_items = Portfolio.objects.filter(user=user_profile)
@@ -72,11 +95,13 @@ class Portfolio(models.Model):
         context['profile'] = user_profile
         context['portfolio_total_shares'] = sum(item.shares for item in portfolio_items)
         context['portfolio_total_value'] = sum(item.shares * item.stock.current_price for item in portfolio_items)
-
         return context
 
 
     def __str__(self):
+        """
+            return the portfolio information
+        """
         return f"{self.user}'s portfolio - {self.stock.ticker}"
 
 
@@ -92,6 +117,9 @@ class WatchList(models.Model):
 
 
     def __str__(self):
+        """
+            return the watchlist information
+        """
         return f"{self.user}'s watchlist - {self.stock.ticker}"
 
 
@@ -99,7 +127,7 @@ class Transaction(models.Model):
     """
         Transaction model to store user's transaction information
     """
-    TRANSACTION_CHOICES = [
+    TRANSACTION_CHOICES = [  # transaction available choices
         ('buy', 'Buy'),
         ('sell', 'Sell')
     ]
@@ -110,8 +138,16 @@ class Transaction(models.Model):
     purchase_date = models.DateField()
     transaction_type = models.CharField(max_length=4, choices=TRANSACTION_CHOICES)
 
+
     class Meta:
+        """
+            ordering the transaction by purchase date
+        """
         ordering = ['-purchase_date'] 
 
+
     def __str__(self):
+        """
+            return the transaction information
+        """
         return f"{self.user} {self.transaction_type} {self.stock.ticker} at ${self.purchase_price}"

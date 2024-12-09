@@ -1,5 +1,5 @@
-## Register the models with the Django Admin tool
-# wt_scrooge_capital/admin.py
+# By: Tsz Kit Wong
+# File: wt_scrooge_capital/admin.py
 
 from django.contrib import admin
 from .models import Portfolio, StockPriceHistory, Transaction, UserProfile, Stock, WatchList

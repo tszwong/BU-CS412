@@ -1,4 +1,9 @@
-from pyexpat.errors import messages
+# By: Tsz Kit Wong
+# File: wt_scrooge_capital/views.py
+
+# views for the wt_scrooge_capital app
+
+
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
@@ -17,6 +22,9 @@ import datetime
 
 
 class CustomLoginView(auth_views.LoginView):
+    """
+        Custom login view
+    """
     authentication_form = CustomAuthenticationForm
     template_name = 'wt_scrooge_capital/login.html'
 
@@ -25,13 +33,15 @@ class HomeView(LoginRequiredMixin, ListView):
     """
         Create a subclass of ListView
     """
-
     model = Stock
     template_name = 'wt_scrooge_capital/home.html'
     context_object_name = 'stocks'
 
 
     def get_context_data(self, **kwargs):
+        """
+            get the context data for the home page
+        """
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
         context['profile'] = user_profile
@@ -47,27 +57,40 @@ class PortfolioView(LoginRequiredMixin, ListView):
     template_name = 'wt_scrooge_capital/portfolio.html'
     context_object_name = 'portfolio'
 
+
     def get_queryset(self):
+        """
+            gets the queryset for the portfolio
+        """
         user_profile = UserProfile.objects.get(user=self.request.user)
         return Portfolio.objects.filter(user=user_profile)
 
+
     def get_context_data(self, **kwargs):
+        """
+            gets the context data for the portfolio
+        """
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
         portfolio_items = Portfolio.objects.filter(user=user_profile)
 
+        # calculate the total value of each stock in the portfolio
         for item in portfolio_items:
             item.total_value = item.shares * item.stock.current_price
         
         context['portfolio'] = portfolio_items
+
+        # calculate the total value of the portfolio based on the current price of the stocks and the number of shares
         context['portfolio_total_shares'] = sum(item.shares for item in portfolio_items)
         context['portfolio_total_value'] = sum(item.shares * item.stock.current_price for item in portfolio_items)
         context['buy_sell_form'] = BuySellForm()
-
         return context
     
 
     def post(self, request, *args, **kwargs):
+        """
+            handles the buy/sell form submission
+        """
         form = BuySellForm(request.POST)
         user_profile = UserProfile.objects.get(user=request.user)
         
@@ -76,12 +99,14 @@ class PortfolioView(LoginRequiredMixin, ListView):
             action = form.cleaned_data['action']
             shares = form.cleaned_data['shares']
 
+            # get the portfolio item for the stock if it exists, otherwise create a new one
             portfolio_item, created = Portfolio.objects.get_or_create(user=user_profile, stock=stock, defaults={
                 'shares': 0,
                 'purchase_price': stock.current_price,
                 'purchase_date': datetime.date.today(),
             })
 
+            # check if the user has enough shares to sell, if not, redirect to the portfolio page
             if action == 'buy':
                 portfolio_item.shares += shares
                 portfolio_item.purchase_price = stock.current_price
@@ -95,7 +120,6 @@ class PortfolioView(LoginRequiredMixin, ListView):
                     purchase_date=datetime.date.today(),
                     transaction_type='buy',
                 )
-                
             elif action == 'sell':
                 if portfolio_item.shares == 0:
                     portfolio_item.delete()
@@ -111,8 +135,10 @@ class PortfolioView(LoginRequiredMixin, ListView):
                     )
 
                     return redirect(reverse('portfolio'))
+                
                 if portfolio_item.shares >= shares:
                     portfolio_item.shares -= shares
+
                     if portfolio_item.shares == 0:
                         portfolio_item.delete()
                         return redirect(reverse('portfolio'))
@@ -135,7 +161,6 @@ class PortfolioView(LoginRequiredMixin, ListView):
 
         return redirect(reverse('portfolio'))
 
-    
 
 class WatchlistView(LoginRequiredMixin, ListView):
     """
@@ -145,19 +170,25 @@ class WatchlistView(LoginRequiredMixin, ListView):
     template_name = 'wt_scrooge_capital/watchlist_expanded.html'
     context_object_name = 'watchlist'
 
-    def get_queryset(self):
 
+    def get_queryset(self):
+        """
+            gets the queryset for the watchlist
+        """
         user_profile = UserProfile.objects.get(user=self.request.user)
         return WatchList.objects.filter(user=user_profile)
 
+
     def get_context_data(self, **kwargs):
+        """
+            gets the context data for the watchlist
+        """
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
         context['profile'] = user_profile
         return context
 
     
-
 class TransactionsView(LoginRequiredMixin, ListView):
     """
         Displays the transaction history for the logged-in user.
@@ -166,16 +197,24 @@ class TransactionsView(LoginRequiredMixin, ListView):
     template_name = 'wt_scrooge_capital/transactions_list.html'
     context_object_name = 'transactions'
 
+
     def get_queryset(self):
+        """
+            gets the queryset for the transaction history
+        """
         user_profile = UserProfile.objects.get(user=self.request.user)
         return Transaction.objects.filter(user=user_profile)
 
+
     def get_context_data(self, **kwargs):
+        """
+            gets the context data for the transaction history
+        """
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
         context['profile'] = user_profile
         return context
-    
+
 
 class ProfileView(LoginRequiredMixin, ListView):
     """
@@ -185,10 +224,18 @@ class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'wt_scrooge_capital/profile.html'
     context_object_name = 'profile'
 
+
     def get_queryset(self):
+        """
+            gets the queryset for the profile
+        """
         return UserProfile.objects.filter(user=self.request.user)
 
+
     def get_context_data(self, **kwargs):
+        """
+            gets the context data for the profile
+        """
         context = super().get_context_data(**kwargs)
         user_profile = UserProfile.objects.get(user=self.request.user)
         context['profile'] = user_profile
@@ -205,7 +252,11 @@ class SignupView(FormView):
     form_class = SignupForm
     success_url = '/'
 
+
     def form_valid(self, form):
+        """
+            handle the form submission
+        """
         user = form.save()
         login(self.request, user)
         return redirect(self.success_url)
@@ -219,11 +270,16 @@ class StockDetailView(LoginRequiredMixin, DetailView):
     template_name = 'wt_scrooge_capital/stock_detail.html'
     context_object_name = 'stock'
 
+
     def get_context_data(self, **kwargs):
+        """
+            get the context data for the stock detail page
+        """
         context = super().get_context_data(**kwargs)
         stock = self.object
         price_history_record = StockPriceHistory.objects.filter(stock=stock).first()
 
+        # get the fields from the StockPriceHistory model to display on the stock detail page's graphs
         if price_history_record and price_history_record.price_history:
             price_history = [
                 float(price.strip()) for price in price_history_record.price_history.strip("[]").split(",")
@@ -250,6 +306,7 @@ class StockDetailView(LoginRequiredMixin, DetailView):
                 yaxis_title_font=dict(size=14),
             )
 
+            # add the fields to the context
             context['open_price'] = price_history_record.open_price
             context['close_price'] = price_history_record.close_price
             context['region'] = price_history_record.region
@@ -258,7 +315,6 @@ class StockDetailView(LoginRequiredMixin, DetailView):
             context['max_price'] = max(price_history)
             context['min_price'] = min(price_history)
             context['diff'] = context['close_price'] - context['open_price']
-
 
         if self.request.user.is_authenticated:
             user_profile = UserProfile.objects.get(user=self.request.user)
@@ -277,7 +333,7 @@ class StockListView(LoginRequiredMixin, ListView):
     model = Stock
     template_name = 'wt_scrooge_capital/all_stocks.html'
     context_object_name = 'stocks'
-    paginate_by = 3
+    paginate_by = 3  # number of stocks per page
 
 
 class RemoveFromWatchlistView(LoginRequiredMixin, View):
@@ -285,6 +341,9 @@ class RemoveFromWatchlistView(LoginRequiredMixin, View):
         Handles the removal of an item from the watchlist
     """
     def post(self, request, pk):
+        """
+            method for removing an item from the watchlist
+        """
         user_profile = UserProfile.objects.get(user=request.user)
         watchlist_item = get_object_or_404(WatchList, pk=pk, user=user_profile)
         watchlist_item.delete()
@@ -296,9 +355,13 @@ class AddToWatchlistView(LoginRequiredMixin, View):
         Handles adding a stock to the user's watchlist
     """
     def post(self, request, stock_id):
+        """
+            method for adding a stock to the watchlist
+        """
         user_profile = UserProfile.objects.get(user=request.user)
         stock = get_object_or_404(Stock, id=stock_id)
 
+        # check if the stock is already in the user's watchlist, if not then add it
         if not WatchList.objects.filter(user=user_profile, stock=stock).exists():
             WatchList.objects.create(
                 user=user_profile,

@@ -1,3 +1,9 @@
+# By: Tsz Kit Wong
+# File wt_scrooge_capital/urls.py
+
+# contains the URL patterns for the wt_scrooge_capital app
+
+
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views

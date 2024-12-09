@@ -1,3 +1,13 @@
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/stock_list.html
+
+    This is he template for the stock list page. It shows all of the stocks available 
+    (aka the stocks I added to the database). It shows the company name, ticker, and current price.
+    There's a btn that allows the user to add the stock to their watch list.
+    There is pagination to go through all of the stocks
+-->
+
 {% extends 'wt_scrooge_capital/base.html' %}
 
 {% block content %}
@@ -6,10 +16,14 @@
     <div class="gw-rec-container">
         {% for stock in stocks %}
         <div class="gw-rec-card">
+
+            <!-- add the stock to watch list -->
             <form action="{% url 'add_to_watchlist' stock.id %}" method="post">
                 {% csrf_token %}
                 <button type="submit">Add to Watchlist</button>
             </form>
+
+            <!-- the stock's brief information -->
             <span style="text-align: center;">
                 <h4>Company: {{ stock.company_name }}</h4>
                 <h3>
@@ -23,6 +37,7 @@
         {% endfor %}
     </div>
 
+    <!-- pagination -->
     {% if is_paginated %}
     <div class="pagination">
         <span class="step-links">

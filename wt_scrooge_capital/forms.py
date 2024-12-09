@@ -1,4 +1,7 @@
-# wt_scrooge_capital/forms.py
+# By: Tsz Kit Wong
+# File: wt_scrooge_capital/forms.py
+
+# This file has all the forms used in the app
 
 from django import forms
 from .models import Stock, UserProfile
@@ -81,6 +84,9 @@ class UpdateProfileForm(forms.ModelForm):
 
 
 class BuySellForm(forms.Form):
+    """
+        Form for buying or selling stocks
+    """
     stock = forms.ModelChoiceField(queryset=Stock.objects.all(), label="Stock")
     action = forms.ChoiceField(choices=[('buy', 'Buy'), ('sell', 'Sell')], label="Action")
     shares = forms.IntegerField(min_value=1, label="Shares")

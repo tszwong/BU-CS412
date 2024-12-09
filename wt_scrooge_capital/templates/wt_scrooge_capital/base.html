@@ -1,18 +1,31 @@
-<!-- wt_scrooge_capital/templates/wt_scrooge_capital/base.html -->
+<!-- 
+    By: Tsz Kit Wong
+    File: wt_scrooge_capital/templates/wt_scrooge_capital/base.html
+
+    The is the base template for the entire project. It contains the navigation bar, footer, and the main content area
+    which is extended by other templates in the project.
+-->
+
+
 {% load static %}
 
 <html>
     <head>
         <!-- <link rel="stylesheet" href="/static/styles.css"> -->
         <link rel="stylesheet" href="{% static 'final_styles.css' %}">
+
+        <!-- using a free font from Google -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap" rel="stylesheet">
+
+        <!-- linking the logo I created -->
         <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <title>WT. Scrooge Capital</title>
     </head>
     <body>
         <div class="page-container">
+            <!-- got this ad idea from Robinhood just to make the site pop a little bit -->
             <div class="ad" style="align-items: center; display: flex; justify-content: center; width: 100vw; font-size: 18px;">
                 <p><span style="font-weight: bold;">Flash Offer:</span> Sign up for an account and receive one random stock from the S&P 500 list!</p>
             </div>
@@ -24,6 +37,7 @@
                                 <img src="{% static 'wt_logo_small.png' %}" style="width: 70px; height: auto;">
                             </li>
                             <li>
+                                <!-- random name that popped into mey head -->
                                 <h1>WT. Scrooge Capital</h1>
                             </li>
                         </ul>
@@ -40,6 +54,7 @@
                         </ul>
             
                         <ul>
+                            <!-- displays the user's username if authentication passed -->
                             {% if user.is_authenticated %}
                                 <li>
                                     <a href="{% url 'profile' %}" 
@@ -54,12 +69,16 @@
                                         {{ user.username }}
                                     </a>
                                 </li>
+
+                                <!-- logout button -->
                                 <li>
                                     <form method="post" action="{% url 'logout' %}" style="display: inline;">
                                         {% csrf_token %}
                                         <button type="submit" style="background: none; border: none; cursor: pointer; font-size: 17px;">Logout</button>
                                     </form>
                                 </li>
+
+                            <!-- if the user is not authenticated show the login btn -->
                             {% else %}
                                 <li><a href="{% url 'login' %}">Login</a></li>
                             {% endif %}
@@ -74,6 +93,7 @@
                 {% endblock %}
             </div>
     
+            <!-- simple footer -->
             <footer>
                 <p>WT. Scrooge Capital &copy; 2024</p>
             </footer>
