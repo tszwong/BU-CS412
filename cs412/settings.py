@@ -158,5 +158,5 @@ STORAGES = {
     },
 }
 
-LOGIN_URL = '/wt_scrooge_capital/login/'
-LOGIN_REDIRECT_URL = '/wt_scrooge_capital/'
+LOGIN_URL = '/project/login/'
+LOGIN_REDIRECT_URL = '/project/'
