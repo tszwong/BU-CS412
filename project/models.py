@@ -1,5 +1,5 @@
 # By: Tsz Kit Wong
-# File: wt_scrooge_capital/models.py
+# File: project/models.py
 
 # Models of the app
 

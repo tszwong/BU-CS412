@@ -1,5 +1,5 @@
 # By: Tsz Kit Wong
-# File: wt_scrooge_capital/forms.py
+# File: project/forms.py
 
 # This file has all the forms used in the app
 

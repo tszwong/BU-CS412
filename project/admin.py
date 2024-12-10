@@ -1,5 +1,5 @@
 # By: Tsz Kit Wong
-# File: wt_scrooge_capital/admin.py
+# File: project/admin.py
 
 from django.contrib import admin
 from .models import Portfolio, StockPriceHistory, Transaction, UserProfile, Stock, WatchList

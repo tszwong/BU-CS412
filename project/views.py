@@ -1,7 +1,7 @@
 # By: Tsz Kit Wong
-# File: wt_scrooge_capital/views.py
+# File: project/views.py
 
-# views for the wt_scrooge_capital app
+# views for the app
 
 
 from django.db import IntegrityError
