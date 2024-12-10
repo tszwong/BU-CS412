@@ -31,7 +31,8 @@ urlpatterns = [
     path('marathon/', include('marathon_analytics.urls')),
     path('voter/', include('voter_analytics.urls')),
     path('wt_scrooge_capital/', include('wt_scrooge_capital.urls')),
-    path('', include('wt_scrooge_capital.urls')),
+    path('project/', include('project.urls')),
+    path('', include('project.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "voter_analytics",
     "wt_scrooge_capital",
     "db_examples",
+    "project",
 ]
 
 MIDDLEWARE = [
