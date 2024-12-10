@@ -131,6 +131,17 @@ class PortfolioView(LoginRequiredMixin, ListView):
 
                     if portfolio_item.shares == 0:
                         portfolio_item.delete()
+
+                        # update the transaction history   
+                        Transaction.objects.create(
+                            user=user_profile,
+                            stock=stock,
+                            shares=shares,
+                            purchase_price=stock.current_price,
+                            purchase_date=datetime.date.today(),
+                            transaction_type='sell',
+                        )
+                        
                         return redirect(reverse('portfolio'))
                     
                     # update the transaction history   
